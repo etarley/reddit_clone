@@ -1,27 +1,34 @@
-import { Flex, Image } from '@chakra-ui/react';
+import Image from 'next/image';
 import React from 'react';
 import RightContent from './RightContent/RightContent';
 import SearchBar from './SearchBar';
 
 const Navbar: React.FC = () => {
   return (
-    <Flex bg='white' height='44px' padding='6px 12px'>
-      <Flex align='center'>
-        <Image src='/redditFace.svg' alt='logo' height='30px' />
+    <nav className='flex bg-white h-11 py-[6px] px-[12px] justify-around'>
+      <div className='flex items-center'>
+        <Image
+          src='/redditFace.svg'
+          alt='logo'
+          width={32}
+          height={32}
+          className=''
+        />
         <Image
           src='/redditText.svg'
           alt='logo'
-          height='46px'
-          display={{ base: 'none', md: 'unset' }}
+          width={57}
+          height={18}
+          className='sm:hidden '
         />
-      </Flex>
+      </div>
       <SearchBar user={''} />
       <RightContent user={''} />
       {/* 
       <Directorty />
       
       */}
-    </Flex>
+    </nav>
   );
 };
 export default Navbar;
