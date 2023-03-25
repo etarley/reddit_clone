@@ -1,13 +1,14 @@
 'use client';
+
 import {
   Modal,
-  ModalOverlay,
+  ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  Flex,
-} from '@chakra-ui/react';
+  ModalOverlay,
+} from '@chakra-ui/modal';
+import { Flex } from '@chakra-ui/react';
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import { authModalState } from '../../atoms/authModalAtom';

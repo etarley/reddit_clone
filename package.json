@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.17",
+    "@chakra-ui/modal": "^2.2.10",
     "@chakra-ui/next-js": "^2.0.1",
-    "@chakra-ui/react": "^2.5.2",
+    "@chakra-ui/react": "^2.5.3",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@fontsource/open-sans": "^4.5.14",
