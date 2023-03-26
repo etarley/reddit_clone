@@ -13,6 +13,7 @@ const Navbar: React.FC = () => {
           width={32}
           height={32}
           className=''
+          loading='lazy'
         />
         <Image
           src='/redditText.svg'
@@ -20,6 +21,7 @@ const Navbar: React.FC = () => {
           width={57}
           height={18}
           className='sm:hidden '
+          loading='lazy'
         />
       </div>
       <SearchBar user={''} />

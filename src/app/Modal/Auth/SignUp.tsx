@@ -1,20 +1,35 @@
 import { authModalState } from '@/app/atoms/authModalAtom';
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Input, Button, Flex, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { auth } from '@/app/firebase/clientApp';
 
-type LoginProps = {};
+const SignUp: React.FC = () => {
+  const [signUpForm, setSignUpForm] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
 
-const Login: React.FC<LoginProps> = () => {
-  const [loginForm, setLoginForm] = useState({ email: '', password: '' });
+  const [errir, setErrir] = useState('');
+
+  const setAuthModalState = useSetRecoilState(authModalState);
+  const [createUserWithEmailAndPassword, user, loading, userError] =
+    useCreateUserWithEmailAndPassword(auth);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
+    setSignUpForm({ ...signUpForm, [e.target.name]: e.target.value });
   };
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(loginForm);
+
+    if (signUpForm.password !== signUpForm.confirmPassword) {
+      return;
+    }
   };
-  const setAuthModalState = useSetRecoilState(authModalState);
+
   return (
     <form onSubmit={onSubmit}>
       <Input
@@ -57,24 +72,43 @@ const Login: React.FC<LoginProps> = () => {
           outline: 'none',
         }}
       ></Input>
+      <Input
+        mb={2}
+        required
+        fontSize='10pt'
+        _placeholder={{ color: 'gray.500' }}
+        _hover={{
+          bg: 'white',
+          border: '1px solid',
+          borderColor: 'blue.500',
+        }}
+        name='confirmPassword'
+        placeholder='confirm password'
+        type='password'
+        onChange={onChange}
+        _focus={{
+          border: '1px solid',
+          borderColor: 'blue.500',
+          outline: 'none',
+        }}
+      ></Input>
       <Button type='submit' mt={2} width='100%' height={'36px'} mb={2}>
-        {' '}
-        Log In{' '}
+        SIGN UP
       </Button>
       <Flex justify='center' align='center' fontSize='10pt'>
-        <Text mr={1}>New here?</Text>
+        <Text mr={1}>Already a redditor?</Text>
         <Text
           color='blue.500'
           cursor='pointer'
           fontWeight={700}
           onClick={() =>
-            setAuthModalState((prev) => ({ ...prev, view: 'signup' }))
+            setAuthModalState((prev) => ({ ...prev, view: 'login' }))
           }
         >
-          SIGN UP
+          LOG IN
         </Text>
       </Flex>
     </form>
   );
 };
-export default Login;
+export default SignUp;

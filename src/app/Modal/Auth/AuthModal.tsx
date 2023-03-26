@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Modal,
   ModalBody,
@@ -8,11 +6,12 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Popover, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import { authModalState } from '../../atoms/authModalAtom';
 import AuthInputs from './AuthInputs';
+import OAuthButton from './OAuthButton';
 
 const AuthModal: React.FC = () => {
   const [modalState, setModalState] = useRecoilState(authModalState);
@@ -24,8 +23,8 @@ const AuthModal: React.FC = () => {
   };
 
   return (
-    <>
-      <Modal isOpen={modalState.open} onClose={handleClose}>
+    <Modal isOpen={modalState.open} onClose={handleClose}>
+      <Popover isLazy>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign={'center'}>
@@ -49,12 +48,16 @@ const AuthModal: React.FC = () => {
               justify='center'
               width='70%'
             >
+              <OAuthButton />
+              <Text color='gray.500' fontWeight={700}>
+                OR
+              </Text>
               <AuthInputs />
             </Flex>
           </ModalBody>
         </ModalContent>
-      </Modal>
-    </>
+      </Popover>
+    </Modal>
   );
 };
 export default AuthModal;

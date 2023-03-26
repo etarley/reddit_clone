@@ -1,5 +1,4 @@
-'use client';
-import { Button } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { authModalState } from '../../atoms/authModalAtom';
@@ -8,7 +7,7 @@ const AuthButtons: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
 
   return (
-    <>
+    <Flex>
       <Button
         variant='outline'
         height='28px'
@@ -29,7 +28,7 @@ const AuthButtons: React.FC = () => {
       >
         Sign Up
       </Button>
-    </>
+    </Flex>
   );
 };
 export default AuthButtons;
